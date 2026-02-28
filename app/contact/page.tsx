@@ -14,26 +14,42 @@ const serviceOptions = [
 ];
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setStatus("sending");
+    setErrorMsg("");
+
     const form = e.currentTarget;
     const data = new FormData(form);
-    const name = data.get("name") as string;
-    const email = data.get("email") as string;
-    const service = data.get("service") as string;
-    const message = data.get("message") as string;
 
-    const subject = encodeURIComponent(
-      `Constant Systems Inquiry${service ? ` — ${service}` : ""}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nService: ${service || "Not specified"}\n\n${message}`
-    );
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          service: data.get("service"),
+          message: data.get("message"),
+        }),
+      });
 
-    window.location.href = `mailto:qj@constantqj.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+      if (!res.ok) {
+        const body = await res.json();
+        throw new Error(body.error || "Something went wrong.");
+      }
+
+      setStatus("sent");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(
+        err instanceof Error ? err.message : "Something went wrong."
+      );
+    }
   }
 
   return (
@@ -73,23 +89,16 @@ export default function Contact() {
               transition={{ delay: 0.25, duration: 0.5 }}
               className="lg:col-span-3"
             >
-              {submitted ? (
-                <div className="bg-accent/10 border border-accent/30 rounded-xl p-8 text-center">
+              {status === "sent" ? (
+                <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-8 text-center">
                   <h2 className="text-xl font-semibold text-white">
-                    Opening your email client...
+                    Message sent!
                   </h2>
                   <p className="mt-2 text-muted">
-                    If your email client didn&apos;t open, send your message
-                    directly to{" "}
-                    <a
-                      href="mailto:qj@constantqj.com"
-                      className="font-medium text-accent hover:text-accent-hover underline"
-                    >
-                      qj@constantqj.com
-                    </a>
+                    We&apos;ll get back to you within 24 hours.
                   </p>
                   <button
-                    onClick={() => setSubmitted(false)}
+                    onClick={() => setStatus("idle")}
                     className="mt-4 text-sm text-accent hover:text-accent-hover font-medium"
                   >
                     Send another message
@@ -167,11 +176,23 @@ export default function Contact() {
                       placeholder="Describe your project or question..."
                     />
                   </div>
+
+                  {status === "error" && (
+                    <p className="text-sm text-red-400">
+                      {errorMsg || "Something went wrong."} You can also email{" "}
+                      <a href="mailto:admin@constantqj.com" className="underline">
+                        admin@constantqj.com
+                      </a>{" "}
+                      directly.
+                    </p>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full sm:w-auto bg-accent text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-accent-hover transition-all hover:shadow-lg hover:shadow-accent/20 text-base"
+                    disabled={status === "sending"}
+                    className="w-full sm:w-auto bg-accent text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-accent-hover transition-all hover:shadow-lg hover:shadow-accent/20 text-base disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
+                    {status === "sending" ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}
@@ -192,10 +213,10 @@ export default function Contact() {
                   <div>
                     <h3 className="text-sm font-medium text-muted">Email</h3>
                     <a
-                      href="mailto:qj@constantqj.com"
+                      href="mailto:admin@constantqj.com"
                       className="mt-1 text-base text-white hover:text-accent transition-colors"
                     >
-                      qj@constantqj.com
+                      admin@constantqj.com
                     </a>
                   </div>
                   <div>
@@ -227,10 +248,10 @@ export default function Contact() {
                   <p className="mt-2 text-sm text-muted leading-relaxed">
                     Send a direct email to{" "}
                     <a
-                      href="mailto:qj@constantqj.com"
+                      href="mailto:admin@constantqj.com"
                       className="text-accent hover:text-accent-hover font-medium"
                     >
-                      qj@constantqj.com
+                      admin@constantqj.com
                     </a>{" "}
                     with a description of what you need. You&apos;ll hear back
                     within 24 hours.

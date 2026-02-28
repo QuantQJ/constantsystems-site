@@ -31,10 +31,10 @@ export default function Footer() {
             </h4>
             <div className="mt-3 flex flex-col gap-2">
               <a
-                href="mailto:qj@constantqj.com"
+                href="mailto:admin@constantqj.com"
                 className="text-sm text-muted hover:text-white transition-colors"
               >
-                qj@constantqj.com
+                admin@constantqj.com
               </a>
               <p className="text-sm text-muted">
                 CityPlex Towers, Suite 3725<br />
