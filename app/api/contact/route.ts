@@ -75,6 +75,32 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true });
     }
 
+    // Verify Turnstile CAPTCHA token
+    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY || "1x0000000000000000000000000000000AA";
+    if (body.turnstileToken) {
+      const turnstileRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: turnstileSecret,
+          response: body.turnstileToken,
+          remoteip: ip,
+        }),
+      });
+      const turnstileData = await turnstileRes.json();
+      if (!turnstileData.success) {
+        return NextResponse.json(
+          { error: "CAPTCHA verification failed. Please try again." },
+          { status: 400 }
+        );
+      }
+    } else {
+      return NextResponse.json(
+        { error: "CAPTCHA is required." },
+        { status: 400 }
+      );
+    }
+
     // Sanitize all inputs
     const name = sanitize(body.name, 200);
     const email = sanitize(body.email, 254);

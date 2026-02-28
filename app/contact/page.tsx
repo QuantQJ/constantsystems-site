@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
+import { Turnstile } from "react-turnstile";
 import GridArt from "@/components/GridArt";
 
 const serviceOptions = [
@@ -16,6 +17,7 @@ const serviceOptions = [
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,6 +37,7 @@ export default function Contact() {
           service: data.get("service"),
           message: data.get("message"),
           website: data.get("website"),
+          turnstileToken,
         }),
       });
 
@@ -45,6 +48,7 @@ export default function Contact() {
 
       setStatus("sent");
       form.reset();
+      setTurnstileToken("");
     } catch (err) {
       setStatus("error");
       setErrorMsg(
@@ -182,6 +186,13 @@ export default function Contact() {
                     />
                   </div>
 
+                  <Turnstile
+                    sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
+                    onVerify={(token: string) => setTurnstileToken(token)}
+                    onExpire={() => setTurnstileToken("")}
+                    theme="dark"
+                  />
+
                   {status === "error" && (
                     <p className="text-sm text-red-400">
                       {errorMsg || "Something went wrong."} You can also email{" "}
@@ -194,7 +205,7 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    disabled={status === "sending"}
+                    disabled={status === "sending" || !turnstileToken}
                     className="w-full sm:w-auto bg-accent text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-accent-hover transition-all hover:shadow-lg hover:shadow-accent/20 text-base disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {status === "sending" ? "Sending..." : "Send Message"}
