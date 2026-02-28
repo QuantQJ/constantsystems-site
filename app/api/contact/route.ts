@@ -97,6 +97,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // Send inquiry to admin
     await resend.emails.send({
       from: "Constant Systems <onboarding@resend.dev>",
       to: "admin@constantqj.com",
@@ -110,6 +111,26 @@ export async function POST(request: Request) {
         "",
         "Message:",
         message,
+      ].join("\n"),
+    });
+
+    // Auto-reply to the sender
+    await resend.emails.send({
+      from: "Constant Systems <onboarding@resend.dev>",
+      to: email,
+      replyTo: "admin@constantqj.com",
+      subject: "We've received your message — Constant Systems",
+      text: [
+        `Hi ${name},`,
+        "",
+        "Thank you for reaching out to Constant Systems. We have received your message and are working on scheduling you for a call or appointment.",
+        "",
+        "We typically respond within 24 hours. If your matter is urgent, feel free to reply directly to this email.",
+        "",
+        "Best regards,",
+        "James Kerr",
+        "Constant Systems",
+        "admin@constantqj.com",
       ].join("\n"),
     });
 
