@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import GridArt from "@/components/GridArt";
 
 const fade = {
   hidden: { opacity: 0, y: 20 },
@@ -24,6 +25,19 @@ const serviceAreas = [
       "RAG systems and knowledge bases",
       "AI-powered automation workflows",
       "NVIDIA DGX and consumer GPU infrastructure",
+    ],
+  },
+  {
+    title: "Formal Verification & Mathematical Proofs",
+    description:
+      "We write machine-checked mathematical proofs and formally verify software correctness. Published work across multiple proof assistants — when it has to be right, we prove it.",
+    items: [
+      "Formal proofs in Lean 4, Coq, and Isabelle/HOL",
+      "Software correctness verification",
+      "Published mathematical proofs and theorems",
+      "Algorithm verification and certified programs",
+      "Type theory and dependent type systems",
+      "Cross-verification across 9 proof assistants",
     ],
   },
   {
@@ -71,13 +85,14 @@ export default function Services() {
   return (
     <>
       {/* Header */}
-      <section className="pt-20 pb-12 md:pt-28 md:pb-16">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="relative pt-20 pb-12 md:pt-28 md:pb-16 overflow-hidden">
+        <GridArt />
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900"
+            className="text-4xl md:text-5xl font-extrabold tracking-tight text-white"
           >
             Services
           </motion.h1>
@@ -85,7 +100,7 @@ export default function Services() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.5 }}
-            className="mt-4 text-lg text-gray-500 max-w-2xl leading-relaxed"
+            className="mt-4 text-lg text-muted max-w-2xl leading-relaxed"
           >
             We build complete systems — from infrastructure to production
             software. Every engagement is tailored to your exact needs, whether
@@ -96,7 +111,7 @@ export default function Services() {
 
       {/* Service Areas */}
       <section className="pb-20 md:pb-28">
-        <div className="max-w-6xl mx-auto px-6 space-y-16">
+        <div className="max-w-6xl mx-auto px-6 space-y-8">
           {serviceAreas.map((area, areaIdx) => (
             <motion.div
               key={area.title}
@@ -105,12 +120,12 @@ export default function Services() {
               viewport={{ once: true }}
               variants={fade}
               custom={areaIdx}
-              className="bg-[var(--bg-secondary)] rounded-2xl p-8 md:p-12"
+              className="bg-surface-card rounded-2xl p-8 md:p-12 border border-border hover:border-accent/20 transition-colors"
             >
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
                 {area.title}
               </h2>
-              <p className="mt-3 text-gray-500 max-w-2xl leading-relaxed">
+              <p className="mt-3 text-muted max-w-2xl leading-relaxed">
                 {area.description}
               </p>
               <ul className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -129,7 +144,7 @@ export default function Services() {
                         d="M4.5 12.75l6 6 9-13.5"
                       />
                     </svg>
-                    <span className="text-sm text-gray-700">{item}</span>
+                    <span className="text-sm text-white/80">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -141,20 +156,23 @@ export default function Services() {
       {/* CTA */}
       <section className="pb-20 md:pb-28">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="bg-[var(--bg-accent)] rounded-2xl px-8 py-14 md:px-16 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">
-              Not sure what you need?
-            </h2>
-            <p className="mt-3 text-gray-500 max-w-md mx-auto">
-              Reach out and describe your situation. We&apos;ll recommend the
-              right approach — no obligation.
-            </p>
-            <Link
-              href="/contact"
-              className="mt-8 inline-flex items-center justify-center bg-accent text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-accent-hover transition-colors text-base"
-            >
-              Start a Conversation
-            </Link>
+          <div className="relative overflow-hidden rounded-2xl px-8 py-14 md:px-16 text-center border border-border">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-surface-card to-purple-500/5" />
+            <div className="relative z-10">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+                Not sure what you need?
+              </h2>
+              <p className="mt-3 text-muted max-w-md mx-auto">
+                Reach out and describe your situation. We&apos;ll recommend the
+                right approach — no obligation.
+              </p>
+              <Link
+                href="/contact"
+                className="mt-8 inline-flex items-center justify-center bg-accent text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-accent-hover transition-all hover:shadow-lg hover:shadow-accent/20 text-base"
+              >
+                Start a Conversation
+              </Link>
+            </div>
           </div>
         </div>
       </section>

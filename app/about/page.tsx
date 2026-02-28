@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import GridArt from "@/components/GridArt";
 
 const fade = {
   hidden: { opacity: 0, y: 20 },
@@ -16,7 +17,8 @@ const stats = [
   { value: "59+", label: "Projects delivered" },
   { value: "8+", label: "Broker integrations" },
   { value: "6", label: "Machine compute cluster" },
-  { value: "9", label: "Proof assistants used" },
+  { value: "9", label: "Proof assistants" },
+  { value: "3", label: "Published proof languages" },
 ];
 
 const capabilities = [
@@ -27,6 +29,15 @@ const capabilities = [
       "Reinforcement learning systems",
       "Computer vision and NLP pipelines",
       "NVIDIA GPU infrastructure (consumer through DGX)",
+    ],
+  },
+  {
+    title: "Formal Verification",
+    items: [
+      "Published proofs in Lean 4, Coq, and Isabelle/HOL",
+      "Machine-checked mathematical theorems",
+      "Algorithm correctness verification",
+      "Cross-verification across 9 proof assistants",
     ],
   },
   {
@@ -44,7 +55,7 @@ const capabilities = [
       "Full-stack web development (React, Next.js, Node.js)",
       "API design and database architecture",
       "DevOps, CI/CD, and infrastructure automation",
-      "Formal verification and mathematical proofs",
+      "Type-safe systems with dependent types",
     ],
   },
   {
@@ -62,13 +73,14 @@ export default function About() {
   return (
     <>
       {/* Header */}
-      <section className="pt-20 pb-12 md:pt-28 md:pb-16">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="relative pt-20 pb-12 md:pt-28 md:pb-16 overflow-hidden">
+        <GridArt />
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900"
+            className="text-4xl md:text-5xl font-extrabold tracking-tight text-white"
           >
             About
           </motion.h1>
@@ -76,7 +88,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.5 }}
-            className="mt-4 text-lg text-gray-500 max-w-2xl leading-relaxed"
+            className="mt-4 text-lg text-muted max-w-2xl leading-relaxed"
           >
             Constant Systems is a solo consulting practice. One person, full
             stack, no overhead. You work directly with the person building your
@@ -88,7 +100,7 @@ export default function About() {
       {/* Stats */}
       <section className="pb-16 md:pb-20">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -97,12 +109,12 @@ export default function About() {
                 viewport={{ once: true }}
                 variants={fade}
                 custom={i}
-                className="bg-[var(--bg-secondary)] rounded-xl p-6 text-center"
+                className="bg-surface-card rounded-xl p-6 text-center border border-border"
               >
-                <div className="text-3xl md:text-4xl font-extrabold text-accent">
+                <div className="text-3xl md:text-4xl font-extrabold gradient-text">
                   {stat.value}
                 </div>
-                <div className="mt-2 text-sm text-gray-500">{stat.label}</div>
+                <div className="mt-2 text-sm text-muted">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -110,7 +122,7 @@ export default function About() {
       </section>
 
       {/* Background */}
-      <section className="py-16 md:py-20 bg-[var(--bg-secondary)]">
+      <section className="py-16 md:py-20 mesh-gradient">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -120,15 +132,16 @@ export default function About() {
             custom={0}
             className="max-w-3xl"
           >
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
               Background
             </h2>
-            <div className="mt-6 space-y-4 text-gray-600 leading-relaxed">
+            <div className="mt-6 space-y-4 text-muted leading-relaxed">
               <p>
-                I build AI systems, trading infrastructure, and production
-                software. My work spans local LLM deployments on NVIDIA hardware,
-                algorithmic trading systems integrated with 8+ brokers, and
-                full-stack web applications.
+                I build AI systems, trading infrastructure, formally verified
+                software, and production applications. My work spans local LLM
+                deployments on NVIDIA hardware, algorithmic trading systems
+                integrated with 8+ brokers, and published mathematical proofs
+                across multiple proof assistants.
               </p>
               <p>
                 I operate a 6-machine compute cluster that includes NVIDIA DGX
@@ -136,6 +149,11 @@ export default function About() {
                 infrastructure I use for client work. This means I can prototype,
                 test, and deploy systems at scale without waiting on cloud
                 providers.
+              </p>
+              <p>
+                I write formally verified proofs in Lean 4, Coq, and
+                Isabelle/HOL — published, machine-checked mathematical work. When
+                software correctness matters, I don&apos;t just test it — I prove it.
               </p>
               <p>
                 My approach is direct: understand the problem, build the
@@ -157,11 +175,11 @@ export default function About() {
             viewport={{ once: true }}
             variants={fade}
             custom={0}
-            className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900"
+            className="text-2xl md:text-3xl font-bold tracking-tight text-white"
           >
             Capabilities
           </motion.h2>
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {capabilities.map((cap, i) => (
               <motion.div
                 key={cap.title}
@@ -170,15 +188,16 @@ export default function About() {
                 viewport={{ once: true }}
                 variants={fade}
                 custom={i + 1}
+                className="bg-surface-card rounded-xl p-6 border border-border"
               >
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-lg font-semibold text-white">
                   {cap.title}
                 </h3>
                 <ul className="mt-3 space-y-2">
                   {cap.items.map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                      <span className="text-sm text-gray-600">{item}</span>
+                      <span className="text-sm text-muted">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -197,21 +216,24 @@ export default function About() {
             viewport={{ once: true }}
             variants={fade}
             custom={0}
-            className="bg-gray-900 rounded-2xl px-8 py-14 md:px-16 text-center"
+            className="relative overflow-hidden rounded-2xl px-8 py-14 md:px-16 text-center border border-border"
           >
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
-              Let&apos;s build something
-            </h2>
-            <p className="mt-3 text-gray-400 max-w-md mx-auto">
-              Direct access to the person doing the work. No sales team, no
-              account managers.
-            </p>
-            <Link
-              href="/contact"
-              className="mt-8 inline-flex items-center justify-center bg-white text-gray-900 font-semibold px-8 py-3.5 rounded-lg hover:bg-gray-100 transition-colors text-base"
-            >
-              Get in Touch
-            </Link>
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-surface-card to-purple-500/5" />
+            <div className="relative z-10">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+                Let&apos;s build something
+              </h2>
+              <p className="mt-3 text-muted max-w-md mx-auto">
+                Direct access to the person doing the work. No sales team, no
+                account managers.
+              </p>
+              <Link
+                href="/contact"
+                className="mt-8 inline-flex items-center justify-center bg-accent text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-accent-hover transition-all hover:shadow-lg hover:shadow-accent/20 text-base"
+              >
+                Get in Touch
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

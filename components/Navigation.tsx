@@ -15,10 +15,10 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+    <nav className="sticky top-0 z-50 bg-surface-primary/80 backdrop-blur-xl border-b border-border">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-tight text-gray-900">
-          Constant Systems
+        <Link href="/" className="text-xl font-bold tracking-tight text-white">
+          <span className="gradient-text">Constant</span> Systems
         </Link>
 
         {/* Desktop */}
@@ -27,7 +27,7 @@ export default function Navigation() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-sm font-medium text-muted hover:text-white transition-colors"
             >
               {link.label}
             </Link>
@@ -47,7 +47,7 @@ export default function Navigation() {
           aria-label="Toggle menu"
         >
           <svg
-            className="w-6 h-6 text-gray-900"
+            className="w-6 h-6 text-white"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -69,7 +69,7 @@ export default function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-gray-100 bg-white"
+            className="md:hidden border-t border-border bg-surface-primary"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
               {links.map((link) => (
@@ -77,7 +77,7 @@ export default function Navigation() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-base font-medium text-gray-700 hover:text-gray-900"
+                  className="text-base font-medium text-muted hover:text-white"
                 >
                   {link.label}
                 </Link>
