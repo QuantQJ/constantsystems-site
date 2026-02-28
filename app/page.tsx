@@ -130,6 +130,21 @@ export default function Home() {
             AI systems, trading infrastructure, formally verified software, and
             secure deployments. Local. Private. Mathematically proven.
           </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="mt-4 text-base text-muted/80"
+          >
+            And if you just want to know how to use it —{" "}
+            <a
+              href="mailto:admin@constantqj.com"
+              className="text-accent hover:text-accent-hover font-medium transition-colors"
+            >
+              reach out
+            </a>
+            . We teach too.
+          </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
