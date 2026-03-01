@@ -222,7 +222,7 @@ export default function About() {
             custom={0}
             className="relative overflow-hidden rounded-2xl px-8 py-14 md:px-16 text-center border border-border"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-surface-card to-purple-500/5" />
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-surface-card to-cyan-900/5" />
             <div className="relative z-10">
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
                 Let&apos;s build something

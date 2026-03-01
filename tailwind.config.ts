@@ -9,18 +9,18 @@ const config: Config = {
     extend: {
       colors: {
         accent: {
-          DEFAULT: "#6366f1",
-          hover: "#818cf8",
-          glow: "rgba(99, 102, 241, 0.15)",
+          DEFAULT: "#22d3ee",
+          hover: "#67e8f9",
+          glow: "rgba(34, 211, 238, 0.12)",
         },
         surface: {
-          primary: "#0a0a0f",
-          secondary: "#111118",
-          card: "#16161f",
-          "card-hover": "#1c1c28",
+          primary: "#09090b",
+          secondary: "#111113",
+          card: "#18181b",
+          "card-hover": "#1f1f23",
         },
-        muted: "#8888a0",
-        border: "#1e1e2e",
+        muted: "#82828e",
+        border: "#27272a",
       },
       fontFamily: {
         sans: [
