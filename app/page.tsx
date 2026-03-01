@@ -107,7 +107,7 @@ export default function Home() {
             transition={{ duration: 0.3 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-surface-card/50 mb-8"
           >
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse-slow" />
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse-slow" />
             <span className="text-xs font-medium text-muted">Accepting new clients</span>
           </motion.div>
 
