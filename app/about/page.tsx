@@ -144,11 +144,9 @@ export default function About() {
                 across multiple proof assistants.
               </p>
               <p>
-                I operate a 6-machine compute cluster that includes NVIDIA DGX
-                Spark, Mac Studio, and multiple GPU workstations — the same
-                infrastructure I use for client work. This means I can prototype,
-                test, and deploy systems at scale without waiting on cloud
-                providers.
+                Every system I build is designed to be handed off. You get
+                clean, documented, production-ready infrastructure that your
+                team can own and operate — no long-term dependency on me.
               </p>
               <p>
                 I write formally verified proofs in Lean 4, Coq, and

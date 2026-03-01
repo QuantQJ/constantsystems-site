@@ -77,16 +77,16 @@ const audiences = [
 
 const trustPoints = [
   {
-    title: "Formally Verified",
-    description: "Published mathematical proofs. Machine-checked correctness across 9 proof assistants.",
+    title: "Privacy Matters",
+    description: "Your data stays yours. Local-first, air-gapped capable, no cloud dependency required.",
   },
   {
-    title: "Local-First",
-    description: "Your data stays on your hardware. No cloud dependency required.",
+    title: "Prove It Works",
+    description: "Published mathematical proofs. Machine-checked correctness — not just tested, verified.",
   },
   {
-    title: "Air-Gapped Capable",
-    description: "Fully functional systems that work without internet access.",
+    title: "Build and Handoff",
+    description: "Clean, documented systems your team can own. No long-term dependency, no lock-in.",
   },
   {
     title: "Full Stack",
