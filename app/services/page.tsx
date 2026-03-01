@@ -24,7 +24,7 @@ const serviceAreas = [
       "Model fine-tuning and training pipelines",
       "RAG systems and knowledge bases",
       "AI-powered automation workflows",
-      "NVIDIA DGX and consumer GPU infrastructure",
+      "On-premise GPU infrastructure at any scale",
     ],
   },
   {
