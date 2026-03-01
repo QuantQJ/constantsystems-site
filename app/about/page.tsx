@@ -16,7 +16,7 @@ const fade = {
 const stats = [
   { value: "59+", label: "Projects delivered" },
   { value: "8+", label: "Broker integrations" },
-  { value: "6", label: "Machine compute cluster" },
+  { value: "Local", label: "Private infrastructure" },
   { value: "9", label: "Proof assistants" },
   { value: "3", label: "Published proof languages" },
 ];
@@ -28,7 +28,7 @@ const capabilities = [
       "Large language model deployment and fine-tuning",
       "Reinforcement learning systems",
       "Computer vision and NLP pipelines",
-      "NVIDIA GPU infrastructure (consumer through DGX)",
+      "Proprietary models that beat public baselines",
     ],
   },
   {
@@ -61,10 +61,10 @@ const capabilities = [
   {
     title: "Infrastructure & Security",
     items: [
-      "Multi-machine cluster orchestration",
+      "On-premise and local infrastructure deployment",
       "Air-gapped and on-premise deployments",
       "Network security and hardening",
-      "Docker, Tailscale, and hybrid cloud setups",
+      "Containerized and hybrid cloud setups",
     ],
   },
 ];
@@ -138,10 +138,16 @@ export default function About() {
             <div className="mt-6 space-y-4 text-muted leading-relaxed">
               <p>
                 I build AI systems, trading infrastructure, formally verified
-                software, and production applications. My work spans local LLM
-                deployments on NVIDIA hardware, algorithmic trading systems
-                integrated with 8+ brokers, and published mathematical proofs
-                across multiple proof assistants.
+                software, and production applications. I train and deploy
+                proprietary local models that beat public baselines — running
+                entirely on your hardware, not in someone else&apos;s cloud.
+              </p>
+              <p>
+                I build the system you need, on the computer you own. Whether
+                that&apos;s a single workstation or a multi-node cluster, the
+                result is yours — private, self-contained, and fully
+                operational without an internet connection if that&apos;s what
+                you need.
               </p>
               <p>
                 Every system I build is designed to be handed off. You get
@@ -149,9 +155,9 @@ export default function About() {
                 team can own and operate — no long-term dependency on me.
               </p>
               <p>
-                I write formally verified proofs in Lean 4, Coq, and
-                Isabelle/HOL — published, machine-checked mathematical work. When
-                software correctness matters, I don&apos;t just test it — I prove it.
+                When software correctness matters, I don&apos;t just test it — I
+                prove it. Published, machine-checked mathematical proofs across
+                multiple proof assistants.
               </p>
               <p>
                 My approach is direct: understand the problem, build the
